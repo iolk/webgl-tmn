@@ -1,6 +1,7 @@
 import GameState from './GameState.js'
 import Terrain from './Terrain.js'
 import Player from './Player.js'
+import Sword from './Sword.js'
 import Shuriken from './Shuriken.js'
 import Utils from './Utils.js'
 
@@ -46,6 +47,14 @@ export default class Ninja {
 	}
 
 	update(delta, id) {
+		if (Utils.areColliding(Sword, this)) {
+			GameState.ninjas.splice(id, 1);
+			GameState.points++
+		}
+		if (Utils.areColliding(Player, this)) {
+			GameState.stop = true;
+		}
+
 		if (!this.stop) {
 			this.translation.x += (this.speed.x * (delta / 100));
 			this.translation.y += (this.speed.y * (delta / 100));

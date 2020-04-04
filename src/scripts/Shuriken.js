@@ -1,5 +1,7 @@
 import GameState from './GameState.js'
 import Utils from './Utils.js'
+import Player from './Player.js'
+import Sword from './Sword.js'
 
 export default class Shuriken {
 
@@ -26,6 +28,7 @@ export default class Shuriken {
 		this.stop = false
 		this.rotation_speed = 60
 		this.color = GameState.colors.blue
+		this.hitted = false
 
 		this.origin = {
 			x: -10,
@@ -49,6 +52,26 @@ export default class Shuriken {
 	}
 
 	update(delta, id) {
+		if (!this.hitted && Utils.areColliding(Sword, this)) {
+			this.direction.x = -this.direction.x
+			this.direction.y = -this.direction.y
+			this.hitted = true
+			GameState.points++
+		}
+		if (!this.hitted && Utils.areColliding(Player, this)) {
+			GameState.stop = true;
+		}
+
+		if (this.hitted) {
+			GameState.ninjas.forEach((ninja, ninja_id) => {
+				if (Utils.areColliding(ninja, this)) {
+					GameState.ninjas.splice(ninja_id, 1);
+					GameState.shurikens.splice(id, 1);
+					GameState.points++
+				}
+			});
+		}
+
 		if (!this.stop) {
 
 			if (this.translation.y > GameState.screen.center.y) {

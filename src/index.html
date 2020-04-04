@@ -15,11 +15,25 @@
 			height: 100vh;
 			display: block;
 		}
+
+		#points,
+		#level {
+			position: absolute;
+			left: 20px;
+			z-index: 1;
+			top: 20px;
+		}
+
+		#level {
+			top: 40px;
+		}
 	</style>
 </head>
 
 <body>
 	<canvas id="canvasgl"></canvas>
+	<div id="points">Score: 0</div>
+	<div id="level">Level: 0</div>
 	<!--
 	<script src="script/vendor/m3.js"></script>
 	<script src="script/vendor/webgl-utils.js"></script>

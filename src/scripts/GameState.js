@@ -16,6 +16,7 @@ export default (function () {
 				red: [1, 0, 0, 1],
 				green: [0, 1, 0, 1],
 				blue: [0, 0, 1, 1],
+				violet: [0.6, 0, 1, 1],
 				gray: [0.4, 0.4, 0.4, 1],
 				black: [0, 0, 0, 1],
 				white: [1, 1, 1, 1],
@@ -32,6 +33,10 @@ export default (function () {
 
 			this.shurikens = [];
 			this.ninjas = [];
+			this.stop = false;
+			this.points = 0;
+			this.gl = null;
+			this.locators = null;
 		}
 	}
 

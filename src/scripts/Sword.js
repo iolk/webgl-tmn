@@ -25,62 +25,60 @@ export default (function () {
 				x: 0,
 				y: 0,
 			}
-
-			this.rotation = {
-				x: 0,
-				y: 1,
-			}
 		}
 
 		update() {
-			var left_to_player = GameState.screen.x / 2 - Player.width / 2;
-			var right_to_player = GameState.screen.x / 2 + Player.width / 2;
+			var left_to_player = GameState.screen.x / 2 - Player.width / 2 - this.width / 2;
+			var right_to_player = GameState.screen.x / 2 + Player.width / 2 + this.width / 2;
+
+			var half_player = GameState.screen.y - Terrain.height - this.height / 2 - Player.height / 2;
+
 			switch (this.state()) {
 				// resting
 				case 0:
-					this.translation.x = left_to_player - this.width / 2 + this.resting.x;
-					this.translation.y = GameState.screen.y - Terrain.height - this.height + this.resting.y;
+					this.translation.x = left_to_player + this.resting.x;
+					this.translation.y = half_player - this.resting.y;
 					this.angle = 0;
 					break;
 
 				// left-bottom
 				case 1:
-					this.translation.x = left_to_player - this.width / 1.5;
+					this.translation.x = left_to_player;
 					this.translation.y = GameState.screen.y - Terrain.height - Player.height / 4;
 					this.angle = 40;
 					break;
 
 				// left
 				case 2:
-					this.translation.x = left_to_player - this.width / 2 - this.resting.x;
-					this.translation.y = GameState.screen.y - Terrain.height - this.height / 2 - Player.height / 2;
+					this.translation.x = left_to_player - this.resting.x;
+					this.translation.y = half_player;
 					this.angle = 0;
 					break;
 
 				// left-up
 				case 3:
-					this.translation.x = left_to_player - this.width / 1.5;
+					this.translation.x = left_to_player;
 					this.translation.y = GameState.screen.y - Terrain.height - Player.height * 1.1;
 					this.angle = -40;
 					break;
 
 				// right-bottom
 				case 4:
-					this.translation.x = right_to_player + this.width / 1.5;
+					this.translation.x = right_to_player;
 					this.translation.y = GameState.screen.y - Terrain.height - Player.height / 4;
 					this.angle = -40;
 					break;
 
 				// Right
 				case 5:
-					this.translation.x = right_to_player + this.width / 2 + this.resting.x;
-					this.translation.y = GameState.screen.y - Terrain.height - this.height / 2 - Player.height / 2;
+					this.translation.x = right_to_player + this.resting.x;
+					this.translation.y = half_player;
 					this.angle = 0;
 					break;
 
 				// right-up
 				case 6:
-					this.translation.x = right_to_player + this.width / 1.5;
+					this.translation.x = right_to_player;
 					this.translation.y = GameState.screen.y - Terrain.height - Player.height * 1.1;
 					this.angle = 40;
 					break;
