@@ -4,5 +4,5 @@ Per avviare il progetto:
 
 ```
 npm install
-npm run watch
+npm run dev
 ```

@@ -32,23 +32,34 @@ function main() {
 
 	// look up where the vertex data needs to go.
 	var positionLocation = gl.getAttribLocation(program, "position");
+	var texcoordLocation = gl.getAttribLocation(program, "texcoord");
 
 	// lookup uniforms
 	var resolutionLocation = gl.getUniformLocation(program, "resolution");
 	var colorLocation = gl.getUniformLocation(program, "color");
 	var matrixLocation = gl.getUniformLocation(program, "matrix");
+	var textureLocation = gl.getUniformLocation(program, "texture");
 
 	// Create a buffer to put positions in
 	var positionBuffer = gl.createBuffer();
-
 	// Bind it to ARRAY_BUFFER (think of it as ARRAY_BUFFER = positionBuffer)
 	gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
+	// Put the positions in the buffer
+	setGeometry(gl);
+
+	// provide texture coordinates for the rectangle.
+	var texcoordBuffer = gl.createBuffer();
+	gl.bindBuffer(gl.ARRAY_BUFFER, texcoordBuffer);
+	// Set Texcoords.
+	setTexcoords(gl);
 
 	var locators = {
 		position: positionLocation,
+		texcoord: texcoordLocation,
 		resolution: resolutionLocation,
 		color: colorLocation,
 		matrix: matrixLocation,
+		texture: textureLocation,
 	};
 
 	GameState.gl = gl;
