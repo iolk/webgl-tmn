@@ -33,11 +33,13 @@ function main() {
 
 	// look up where the vertex data needs to go.
 	var positionLocation = gl.getAttribLocation(program, "position");
+	var texcoordLocation = gl.getAttribLocation(program, "texcoord");
 
 	// lookup uniforms
 	var resolutionLocation = gl.getUniformLocation(program, "resolution");
 	var colorLocation = gl.getUniformLocation(program, "color");
 	var matrixLocation = gl.getUniformLocation(program, "matrix");
+	var textureLocation = gl.getUniformLocation(program, "texture");
 
 	// Create a buffer to put positions in
 	var positionBuffer = gl.createBuffer();
@@ -47,9 +49,11 @@ function main() {
 
 	var locators = {
 		position: positionLocation,
+		texcoord: texcoordLocation,
 		resolution: resolutionLocation,
 		color: colorLocation,
 		matrix: matrixLocation,
+		texture: textureLocation,
 	};
 
 	GameState.gl = gl;
