@@ -35,8 +35,10 @@ export default (function () {
 			this.ninjas = [];
 			this.stop = false;
 			this.points = 0;
+
 			this.gl = null;
 			this.locators = null;
+			this.buffers = null;
 		}
 	}
 

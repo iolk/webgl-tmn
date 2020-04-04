@@ -9,7 +9,7 @@ export default class Utils {
 		// Setup a rectangle
 		this.setRectangle(gl, obj.width, obj.height);
 
-		// Tell the attribute how to get data out of positionBuffer (ARRAY_BUFFER)
+		// Tell the position attribute how to get data out of positionBuffer (ARRAY_BUFFER)
 		gl.vertexAttribPointer(locators.position, 2, gl.FLOAT, false, 0, 0);
 
 		// Set the color
@@ -52,6 +52,21 @@ export default class Utils {
 			gl.STATIC_DRAW);
 	}
 
+	static setTexcoords(gl) {
+		gl.bufferData(
+			gl.ARRAY_BUFFER,
+			new Float32Array([
+				// left column front
+				0, 0,
+				0, 1,
+				1, 0,
+				0, 1,
+				1, 1,
+				1, 0,
+			]),
+			gl.STATIC_DRAW);
+	}
+
 	static debugDraw(gl, locators, v) {
 		gl.bufferData(
 			gl.ARRAY_BUFFER,
@@ -85,13 +100,6 @@ export default class Utils {
 		for (var i = 0; i < 2; i++)
 			if (!this.areOverlapping(p_a2[i], p_b2[i]))
 				return false;
-
-		console.log("collision")
-		console.log(p_a)
-		console.log(p_b)
-		console.log(p_a2)
-		console.log(p_b2)
-		console.log("#######")
 
 		return true;
 	}
@@ -176,4 +184,5 @@ export default class Utils {
 	static radToDeg(r) { return r * 180 / Math.PI; }
 	static degToRad(d) { return d * Math.PI / 180; }
 	static getRandomInt(max) { return Math.floor(Math.random() * Math.floor(max)); }
+	static isPowerOf2(value) { return (value & (value - 1)) === 0; }
 }

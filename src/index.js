@@ -8,9 +8,10 @@ import Player from './scripts/Player.js'
 import Sword from './scripts/Sword.js'
 import Ninja from './scripts/Ninja.js'
 import Shuriken from './scripts/Shuriken.js'
-import GLProgram from './scripts/GLProgram.js'
 import Utils from './scripts/Utils.js'
 import Rectangle from './scripts/Rectangle.js'
+import VertexShader from './scripts/shaders/vertex.glsl'
+import FragmentShader from './scripts/shaders/fragment.glsl'
 
 GameState.screen.center.x = GameState.screen.x / 2;
 GameState.screen.center.y = GameState.screen.y - Terrain.height;
@@ -28,38 +29,27 @@ function main() {
 	}
 
 	// setup GLSL program
-	var program = webglUtils.createProgramFromSources(gl, [GLProgram.vertexShader(), GLProgram.fragmentShader()]);
+	var program = webglUtils.createProgramFromSources(gl, [VertexShader, FragmentShader]);
 
 	// look up where the vertex data needs to go.
 	var positionLocation = gl.getAttribLocation(program, "position");
-	var texcoordLocation = gl.getAttribLocation(program, "texcoord");
 
 	// lookup uniforms
 	var resolutionLocation = gl.getUniformLocation(program, "resolution");
 	var colorLocation = gl.getUniformLocation(program, "color");
 	var matrixLocation = gl.getUniformLocation(program, "matrix");
-	var textureLocation = gl.getUniformLocation(program, "texture");
 
 	// Create a buffer to put positions in
 	var positionBuffer = gl.createBuffer();
+
 	// Bind it to ARRAY_BUFFER (think of it as ARRAY_BUFFER = positionBuffer)
 	gl.bindBuffer(gl.ARRAY_BUFFER, positionBuffer);
-	// Put the positions in the buffer
-	setGeometry(gl);
-
-	// provide texture coordinates for the rectangle.
-	var texcoordBuffer = gl.createBuffer();
-	gl.bindBuffer(gl.ARRAY_BUFFER, texcoordBuffer);
-	// Set Texcoords.
-	setTexcoords(gl);
 
 	var locators = {
 		position: positionLocation,
-		texcoord: texcoordLocation,
 		resolution: resolutionLocation,
 		color: colorLocation,
 		matrix: matrixLocation,
-		texture: textureLocation,
 	};
 
 	GameState.gl = gl;
@@ -68,7 +58,7 @@ function main() {
 	var previous_delta = 0
 	var fps_limit = 30
 	var last_spawn = 0
-	var spawn_time = 2000
+	var spawn_time = 2500
 	var max_spawn = 3
 
 

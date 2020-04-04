@@ -24,7 +24,8 @@
 		"webpack": "^4.41.5",
 		"webpack-cli": "^3.3.10",
 		"webpack-dev-server": "^3.10.1",
-		"webpack-merge": "^4.2.2"
+		"webpack-merge": "^4.2.2",
+		"glslify-loader": "^2.0.0"
 	},
 	"staticFiles": {
 		"staticPath": "static",
