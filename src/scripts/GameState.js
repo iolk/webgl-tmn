@@ -4,8 +4,8 @@ export default (function () {
 	class GameState {
 		constructor() {
 			this.screen = {
-				x: 800,
-				y: 600,
+				x: 640,
+				y: 480,
 				center: {
 					x: 0,
 					y: 0,
@@ -35,8 +35,10 @@ export default (function () {
 			this.ninjas = [];
 			this.stop = false;
 			this.points = 0;
+
 			this.gl = null;
 			this.locators = null;
+			this.buffers = null;
 		}
 	}
 
