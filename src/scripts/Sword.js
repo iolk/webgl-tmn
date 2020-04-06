@@ -4,9 +4,7 @@ import Terrain from './Terrain.js'
 
 export default (function () {
 	class Sword {
-
 		constructor() {
-			console.log("sword")
 			this.width = 70
 			this.height = 10
 			this.color = GameState.colors.gray
@@ -112,6 +110,7 @@ export default (function () {
 			 * 6 - right-up
 			 * 7 - up
 			 * 8 - middle
+			 * 9 - middle2
 			 */
 			if (GameState.keys.left && GameState.keys.right) return 8;
 			if (GameState.keys.left || GameState.keys.right) {

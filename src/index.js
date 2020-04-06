@@ -15,6 +15,9 @@ import ImageLoader from './scripts/ImageLoader.js';
 GameState.screen.center.x = GameState.screen.x / 2;
 GameState.screen.center.y = GameState.screen.y - Terrain.height;
 
+var a = new Rectangle(1, GameState.screen.y, GameState.colors.red, 0);
+a.translation.x = GameState.screen.center.x;
+
 var pointsDiv = document.getElementById('points')
 var levelDiv = document.getElementById('level')
 
@@ -63,9 +66,10 @@ function main() {
 
 			Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, Background);
 			Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, Terrain);
-			Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, Player);
 
 			Sword.update();
+			Player.update();
+			Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, Player);
 			Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, Sword);
 
 			GameState.ninjas.forEach((ninja, id) => {
@@ -76,6 +80,9 @@ function main() {
 				Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, shuriken);
 				shuriken.update(delta, id)
 			});
+
+			Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, a);
+
 
 			pointsDiv.innerText = "Score: " + GameState.points
 			levelDiv.innerText = "Level: " + level

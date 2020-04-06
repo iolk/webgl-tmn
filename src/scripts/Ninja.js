@@ -9,6 +9,16 @@ export default class Ninja {
 
 	constructor() {
 
+		/**
+		 * 0 - Air
+		 * 1 - Landed
+		 * 2 - Launch
+		 * 3 - Jump
+		 * 4 - Sliding
+		 */
+		this.state = 0
+
+		// Sizes based on textures
 		this.sizes = [];
 		this.sizes[0] = { w: 44, h: 50 }
 		this.sizes[1] = { w: 36, h: 56 }
@@ -16,6 +26,7 @@ export default class Ninja {
 		this.sizes[3] = { w: 50, h: 74 }
 		this.sizes[4] = { w: 92, h: 54 }
 
+		// General settings
 		this.width = this.sizes[0].w
 		this.height = this.sizes[0].h
 		this.angle = 0
@@ -38,15 +49,6 @@ export default class Ninja {
 		this.left_spawn = Utils.getRandomInt(1000) % 2 == 0
 		var spawn_x = this.left_spawn ? 0 : GameState.screen.x - 50
 		var spawn_y = Utils.getRandomInt(GameState.screen.y - Terrain.height - 200)
-
-		/**
-		 * 0 - Air
-		 * 1 - Landed
-		 * 2 - Launch
-		 * 3 - Jump
-		 * 4 - Sliding
-		 */
-		this.state = 0
 
 		this.speed = {
 			x: this.left_spawn ? 15 : -15,
