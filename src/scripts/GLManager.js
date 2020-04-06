@@ -1,10 +1,12 @@
 import webglUtils from './vendor/webgl-utils.js'
 
+import GameState from './GameState.js'
 import VertexShader from './shaders/vertex.glsl'
 import FragmentShader from './shaders/fragment.glsl'
 
-export default (function () {
+console.log("glmanager.js")
 
+var glm = (function () {
 	class GLManager {
 		constructor() {
 			this.gl = null
@@ -32,17 +34,17 @@ export default (function () {
 			// Create a buffer to put positions in
 			this.buffers.position = this.gl.createBuffer();
 			this.buffers.texcoord = this.gl.createBuffer();
-			console.log(this.gl)
 		}
 
 		settings() {
 			webglUtils.resizeCanvasToDisplaySize(this.gl.canvas);
 			this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
-			this.gl.clear(this.gl.COLOR_BUFFER_BIT);
 
-			this.gl.useProgram(this.program);
-
-			this.gl.uniform2f(this.locators.resolution, this.gl.canvas.width, this.gl.canvas.height);
+			if (!GameState.stop) {
+				this.gl.clear(this.gl.COLOR_BUFFER_BIT);
+				this.gl.useProgram(this.program);
+				this.gl.uniform2f(this.locators.resolution, this.gl.canvas.width, this.gl.canvas.height);
+			}
 		}
 
 		fpsLimit(delta) { return this.fps_limit && delta < 1000 / this.fps_limit }
@@ -63,4 +65,9 @@ export default (function () {
 			return instance
 		}
 	}
-})().getInstance()
+})()
+
+export default glm.getInstance()
+export var gl = glm.getInstance().gl;
+export var locators = glm.getInstance().locators;
+export var buffers = glm.getInstance().buffers;

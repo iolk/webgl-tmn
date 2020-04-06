@@ -1,5 +1,6 @@
 import GameState from './GameState.js'
 import TerrainTexture from '../textures/Terrain.png'
+import ImageLoader from './ImageLoader.js'
 
 export default (function () {
 
@@ -10,9 +11,8 @@ export default (function () {
 			this.height = 100
 			this.color = GameState.colors.red
 			this.angle = 0
-			this.haveTexture = false
-			this.texture = null
-			this.image = null
+
+			this.have_texture = true
 
 			this.origin = {
 				x: 0,
@@ -30,28 +30,7 @@ export default (function () {
 			}
 		}
 
-		bindTexture(gl) {
-			gl.bindTexture(gl.TEXTURE_2D, this.texture)
-			gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, this.image)
-		}
-
-		loadImage(gl) {
-			var obj = this
-
-			this.texture = gl.createTexture()
-			gl.bindTexture(gl.TEXTURE_2D, this.texture)
-
-			this.image = new Image()
-			this.image.src = TerrainTexture
-
-			this.image.addEventListener('load', function () {
-				console.log('terrain image loaded')
-				gl.bindTexture(gl.TEXTURE_2D, obj.texture)
-				gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, obj.image)
-
-				obj.haveTexture = true
-			})
-		}
+		getTextureName() { return "Terrain"; }
 	}
 
 	var instance

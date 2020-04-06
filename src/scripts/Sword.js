@@ -11,7 +11,7 @@ export default (function () {
 			this.height = 10
 			this.color = GameState.colors.gray
 			this.angle = 0
-			this.haveTexture = false
+			this.have_texture = false
 
 			this.resting = {
 				x: 20,

@@ -10,6 +10,7 @@ import Sword from './scripts/Sword.js'
 import Ninja from './scripts/Ninja.js'
 import Shuriken from './scripts/Shuriken.js'
 import Rectangle from './scripts/Rectangle.js'
+import ImageLoader from './scripts/ImageLoader.js';
 
 GameState.screen.center.x = GameState.screen.x / 2;
 GameState.screen.center.y = GameState.screen.y - Terrain.height;
@@ -29,8 +30,7 @@ function main() {
 	GLManager.gl = gl
 	GLManager.setProgram()
 
-	Terrain.loadImage(GLManager.gl)
-	Background.loadImage(GLManager.gl)
+	ImageLoader.load()
 
 	var previous_delta = 0
 	var last_spawn = 0
@@ -39,9 +39,12 @@ function main() {
 
 	// Draw a the scene.
 	function drawScene(current_delta) {
-
 		// ----- FPS LIMIT START -----
 		requestAnimationFrame(drawScene);
+
+		if (!ImageLoader.loaded())
+			return;
+
 		var delta = current_delta - previous_delta;
 
 		if (GLManager.fpsLimit(delta))

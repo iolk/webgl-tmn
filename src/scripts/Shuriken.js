@@ -21,15 +21,15 @@ export default class Shuriken {
 		var y_angle = 90 - x_angle;
 		y_angle *= ng ? -1 : 1;
 
-		this.width = 20
-		this.height = 20
+		this.width = 22
+		this.height = 22
 		this.speed = 30
 		this.angle = 0
 		this.stop = false
 		this.rotation_speed = 60
 		this.color = GameState.colors.blue
 		this.hitted = false
-		this.haveTexture = false
+		this.have_texture = true
 
 		this.origin = {
 			x: -10,
@@ -84,5 +84,12 @@ export default class Shuriken {
 			this.translation.x += (this.direction.x * this.speed * (delta / 100));
 			this.translation.y += (this.direction.y * this.speed * (delta / 100));
 		}
+	}
+
+	getTextureName() {
+		if (!this.stop)
+			return "ShurikenActive"
+		else
+			return "ShurikenStop"
 	}
 }

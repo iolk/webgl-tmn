@@ -12,7 +12,7 @@ export default (function () {
 			this.color = GameState.colors.blue
 			this.state = null
 			this.angle = 0
-			this.haveTexture = false
+			this.have_texture = false
 
 			this.origin = {
 				x: 0,

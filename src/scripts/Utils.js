@@ -1,5 +1,6 @@
 import m3 from './vendor/m3.js'
 import GameState from './GameState.js'
+import ImageLoader from './ImageLoader.js'
 
 export default class Utils {
 
@@ -10,8 +11,8 @@ export default class Utils {
 		gl.vertexAttribPointer(locators.position, 2, gl.FLOAT, false, 0, 0)
 		this.setRectangle(gl, obj.width, obj.height)
 
-		if (obj.haveTexture) {
-			obj.bindTexture(gl)
+		if (obj.have_texture) {
+			ImageLoader.bindTexture(obj.getTextureName())
 			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE)
 			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE)
 			gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
@@ -35,7 +36,7 @@ export default class Utils {
 		matrix = m3.multiply(matrix, origin_matrix)
 		gl.uniformMatrix3fv(locators.matrix, false, matrix)
 
-		gl.uniform1i(locators.haveTexture, obj.haveTexture)
+		gl.uniform1i(locators.haveTexture, obj.have_texture)
 
 		// Draw the rectangle
 		gl.drawArrays(gl.TRIANGLES, 0, 6)
