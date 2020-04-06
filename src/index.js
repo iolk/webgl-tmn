@@ -83,6 +83,10 @@ function main() {
 
 			Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, a);
 
+			Player.hitboxes.forEach(hitbox => {
+				Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, hitbox);
+			});
+
 
 			pointsDiv.innerText = "Score: " + GameState.points
 			levelDiv.innerText = "Level: " + level

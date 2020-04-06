@@ -59,8 +59,12 @@ export default class Shuriken {
 			this.hitted = true
 			GameState.points++
 		}
-		if (!this.hitted && Utils.areColliding(Player, this)) {
-			GameState.stop = true;
+		if (!this.hitted) {
+			Player.hitboxes.forEach(hitbox => {
+				if (Utils.areColliding(hitbox, this)) {
+					GameState.stop = true
+				}
+			});
 		}
 
 		if (this.hitted) {

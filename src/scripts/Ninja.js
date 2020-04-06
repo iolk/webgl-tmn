@@ -86,9 +86,11 @@ export default class Ninja {
 			GameState.ninjas.splice(id, 1)
 			GameState.points++
 		}
-		if (Utils.areColliding(Player, this)) {
-			GameState.stop = true
-		}
+		Player.hitboxes.forEach(hitbox => {
+			if (Utils.areColliding(hitbox, this)) {
+				GameState.stop = true
+			}
+		});
 
 		if (this.translation.x > GameState.screen.x || this.translation.x < 0) {
 			this.stop = true

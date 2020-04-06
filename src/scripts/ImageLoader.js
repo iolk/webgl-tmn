@@ -82,7 +82,7 @@ export default (function () {
 			image.src = texture
 
 			image.addEventListener('load', function () {
-				console.log(texture_name + " image loaded");
+				//console.log(texture_name + " image loaded");
 				GLM.gl.bindTexture(GLM.gl.TEXTURE_2D, il.textures.get(texture_name))
 				GLM.gl.texImage2D(GLM.gl.TEXTURE_2D, 0, GLM.gl.RGBA, GLM.gl.RGBA, GLM.gl.UNSIGNED_BYTE, image)
 				il.count--
