@@ -6,11 +6,13 @@ export default (function () {
 	class Player {
 
 		constructor() {
+			console.log("player")
 			this.width = 60
 			this.height = 100
 			this.color = GameState.colors.blue
 			this.state = null
 			this.angle = 0
+			this.haveTexture = false
 
 			this.origin = {
 				x: 0,

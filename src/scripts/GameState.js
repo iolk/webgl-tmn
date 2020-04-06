@@ -4,8 +4,8 @@ export default (function () {
 	class GameState {
 		constructor() {
 			this.screen = {
-				x: 800,
-				y: 600,
+				x: 640,
+				y: 480,
 				center: {
 					x: 0,
 					y: 0,

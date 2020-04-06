@@ -23,6 +23,7 @@ export default class Ninja {
 		this.slide = Utils.getRandomInt(1000) % 2 == 0 ? true : false
 		this.angle = 0
 		this.color = GameState.colors.green
+		this.haveTexture = false
 
 		this.speed = {
 			x: left_spawn ? 15 : -15,

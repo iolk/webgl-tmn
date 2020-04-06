@@ -1,13 +1,14 @@
 import GameState from './GameState.js'
-import TerrainTexture from '../textures/Terrain.png'
+import Terrain from './Terrain.js'
+import BackgroundTexture from '../textures/Background.png'
 
 export default (function () {
 
-	class Terrain {
+	class Background {
 		constructor() {
-			console.log("terrain")
+			console.log("background")
 			this.width = GameState.screen.x
-			this.height = 100
+			this.height = GameState.screen.y - Terrain.height
 			this.color = GameState.colors.red
 			this.angle = 0
 			this.haveTexture = false
@@ -21,7 +22,7 @@ export default (function () {
 
 			this.translation = {
 				x: 0,
-				y: GameState.screen.y - this.height,
+				y: 0,
 			}
 
 			this.rotation = {
@@ -42,10 +43,10 @@ export default (function () {
 			gl.bindTexture(gl.TEXTURE_2D, this.texture)
 
 			this.image = new Image()
-			this.image.src = TerrainTexture
+			this.image.src = BackgroundTexture
 
 			this.image.addEventListener('load', function () {
-				console.log('terrain image loaded')
+				console.log('background image loaded')
 				gl.bindTexture(gl.TEXTURE_2D, obj.texture)
 				gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, obj.image)
 
@@ -57,7 +58,7 @@ export default (function () {
 	var instance
 
 	function createInstance() {
-		var obj = new Terrain()
+		var obj = new Background()
 		return obj
 	}
 

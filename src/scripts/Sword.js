@@ -6,10 +6,12 @@ export default (function () {
 	class Sword {
 
 		constructor() {
+			console.log("sword")
 			this.width = 70
 			this.height = 10
 			this.color = GameState.colors.gray
 			this.angle = 0
+			this.haveTexture = false
 
 			this.resting = {
 				x: 20,

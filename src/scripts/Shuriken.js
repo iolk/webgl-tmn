@@ -29,6 +29,7 @@ export default class Shuriken {
 		this.rotation_speed = 60
 		this.color = GameState.colors.blue
 		this.hitted = false
+		this.haveTexture = false
 
 		this.origin = {
 			x: -10,
