@@ -4,6 +4,16 @@ import TerrainTexture from '../textures/Terrain.png'
 import BackgroundTexture from '../textures/Background.png'
 import ShurikenActive from '../textures/Shuriken/ShurikenActive.png'
 import ShurikenStop from '../textures/Shuriken/ShurikenStop.png'
+import NinjaAirLeft from '../textures/Ninja/NinjaAirLeft.png'
+import NinjaAirRight from '../textures/Ninja/NinjaAirRight.png'
+import NinjaJumpLeft from '../textures/Ninja/NinjaJumpLeft.png'
+import NinjaJumpRight from '../textures/Ninja/NinjaJumpRight.png'
+import NinjaLandedLeft from '../textures/Ninja/NinjaLandedLeft.png'
+import NinjaLandedRight from '../textures/Ninja/NinjaLandedRight.png'
+import NinjaLaunchLeft from '../textures/Ninja/NinjaLaunchLeft.png'
+import NinjaLaunchRight from '../textures/Ninja/NinjaLaunchRight.png'
+import NinjaSlidingLeft from '../textures/Ninja/NinjaSlidingLeft.png'
+import NinjaSlidingRight from '../textures/Ninja/NinjaSlidingRight.png'
 
 console.log("imageloader.js")
 
@@ -19,8 +29,20 @@ export default (function () {
 		load() {
 			this.makeImage(TerrainTexture, "Terrain")
 			this.makeImage(BackgroundTexture, "Background")
+
 			this.makeImage(ShurikenActive, "ShurikenActive")
 			this.makeImage(ShurikenStop, "ShurikenStop")
+
+			this.makeImage(NinjaAirLeft, "NinjaAirLeft")
+			this.makeImage(NinjaAirRight, "NinjaAirRight")
+			this.makeImage(NinjaJumpLeft, "NinjaJumpLeft")
+			this.makeImage(NinjaJumpRight, "NinjaJumpRight")
+			this.makeImage(NinjaLandedLeft, "NinjaLandedLeft")
+			this.makeImage(NinjaLandedRight, "NinjaLandedRight")
+			this.makeImage(NinjaLaunchLeft, "NinjaLaunchLeft")
+			this.makeImage(NinjaLaunchRight, "NinjaLaunchRight")
+			this.makeImage(NinjaSlidingLeft, "NinjaSlidingLeft")
+			this.makeImage(NinjaSlidingRight, "NinjaSlidingRight")
 		}
 
 		loaded() { return this.count == 0 }
