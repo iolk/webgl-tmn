@@ -16,8 +16,12 @@ import ImageLoader from './scripts/ImageLoader.js';
 GameState.screen.center.x = GameState.screen.x / 2;
 GameState.screen.center.y = GameState.screen.y - Terrain.height;
 
-var a = new Rectangle(1, GameState.screen.y, GameState.colors.red, 0);
-a.translation.x = GameState.screen.center.x;
+const DEBUG = false
+
+if (DEBUG) {
+	var a = new Rectangle(1, GameState.screen.y, GameState.colors.red, 0);
+	a.translation.x = GameState.screen.center.x;
+}
 
 function main() {
 	// Get A WebGL context
@@ -72,23 +76,33 @@ function main() {
 			GameState.ninjas.forEach((ninja, id) => {
 				ninja.update(delta, id)
 				Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, ninja);
-				//Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, ninja.hitbox);
 			});
 			GameState.shurikens.forEach((shuriken, id) => {
 				shuriken.update(delta, id)
 				Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, shuriken);
 			});
 
-			/**
-			 * Debug draws
-			Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, Sword);
 
-			Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, a);
+			// ----- DEBUG DRAW START -----
+			if (DEBUG) {
+				GameState.ninjas.forEach((ninja, id) => {
+					Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, ninja.hitbox);
+				});
+				GameState.shurikens.forEach((shuriken, id) => {
+					shuriken.have_texture = false
+					shuriken.color = [127, 127, 0, 1]
+					Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, shuriken);
+				});
 
-			Player.hitboxes.forEach(hitbox => {
-				Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, hitbox);
-			});
-			*/
+				Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, Sword);
+
+				Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, a);
+
+				Player.hitboxes.forEach(hitbox => {
+					Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, hitbox);
+				});
+			}
+			// ----- DEBUG DRAW END -----
 
 			$('#points').text("SCORE: " + GameState.points)
 			$('#level').text("LEVEL: " + level)
