@@ -9,7 +9,7 @@ npm install
 npm run dev
 ```
 
-### Thinks to do:
+### Roadmap:
 
 - [x] Working version of game
 - [ ] In game music
