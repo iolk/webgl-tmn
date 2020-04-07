@@ -39,8 +39,9 @@ function main() {
 
 	var previous_delta = 0
 	var last_spawn = 0
-	var spawn_time = 2500
-	var max_spawn = 3
+	var max_spawn_time = 3000
+	var min_spawn_time = 700
+	var max_spawn = 2
 
 	// Draw a the scene.
 	function drawScene(current_delta) {
@@ -59,8 +60,15 @@ function main() {
 		GLManager.settings()
 
 		if (!GameState.stop) {
-			var level = Math.floor(GameState.points / 10) + 3;
-			if (current_delta - last_spawn > spawn_time - 300 * level && GameState.ninjas.length <= max_spawn + level) {
+
+			var level = Math.floor(GameState.points / 10);
+			var spawn_time = max_spawn_time - 300 * level;
+			spawn_time = spawn_time < min_spawn_time ? min_spawn_time : spawn_time;
+
+
+			if (current_delta - last_spawn > spawn_time
+				&& GameState.ninjas.length <= max_spawn + level) {
+				console.log(spawn_time + " " + GameState.ninjas.length + " " + (max_spawn + level))
 				var ninja = new Ninja();
 				GameState.ninjas.push(ninja)
 				last_spawn = current_delta;
