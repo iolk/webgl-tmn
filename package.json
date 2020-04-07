@@ -31,5 +31,7 @@
 		"staticPath": "static",
 		"watcherGlob": "**"
 	},
-	"dependencies": {}
+	"dependencies": {
+		"jquery": "^3.4.1"
+	}
 }

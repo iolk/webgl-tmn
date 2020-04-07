@@ -4,6 +4,7 @@ import Player from './Player.js'
 import Sword from './Sword.js'
 import Shuriken from './Shuriken.js'
 import Utils from './Utils.js'
+import Rectangle from './Rectangle.js'
 
 export default class Ninja {
 
@@ -22,7 +23,7 @@ export default class Ninja {
 		this.sizes = [];
 		this.sizes[0] = { w: 44, h: 50 }
 		this.sizes[1] = { w: 36, h: 56 }
-		this.sizes[2] = { w: 44, h: 50 }
+		this.sizes[2] = { w: 64, h: 50 }
 		this.sizes[3] = { w: 50, h: 74 }
 		this.sizes[4] = { w: 92, h: 54 }
 
@@ -32,6 +33,8 @@ export default class Ninja {
 		this.angle = 0
 		this.have_texture = true
 		this.color = GameState.colors.green
+		this.hitbox = new Rectangle(this.sizes[0].w, this.sizes[0].h, [255, 0, 0, 1], 0)
+		this.hitbox.max_width = 50
 
 		// Shuriken settings
 		this.shuriken_spawned = false
@@ -44,6 +47,8 @@ export default class Ninja {
 		this.launch_time = 4
 		this.weight = 0.2
 		this.stop = false
+		// To fix sliding ninja left offset
+		this.prev_texture = null
 
 		// Spawn settings
 		this.left_spawn = Utils.getRandomInt(1000) % 2 == 0
@@ -69,15 +74,25 @@ export default class Ninja {
 	move(delta) {
 		this.translation.x += (this.speed.x * (delta / 100))
 		this.translation.y += (this.speed.y * (delta / 100))
+		this.hitbox.translation.x = this.translation.x
+		this.hitbox.translation.y = this.translation.y
 		this.speed.y += GameState.GRAVITY * this.weight
 	}
 
 	setSize() {
 		this.width = this.sizes[this.state].w
 		this.height = this.sizes[this.state].h
+		this.hitbox.width = this.width > this.hitbox.max_width ? this.hitbox.max_width : this.width;
+		this.hitbox.height = this.height
+
+		if (!this.left_spawn && this.width > this.hitbox.max_width) {
+			this.hitbox.translation.x += this.width - this.hitbox.max_width
+		}
+
 		// If touch the terrain lands
 		if (this.translation.y + this.height > GameState.screen.center.y) {
 			this.translation.y = GameState.screen.center.y - this.height
+			this.hitbox.translation.y = this.translation.y
 		}
 	}
 
@@ -87,7 +102,7 @@ export default class Ninja {
 			GameState.points++
 		}
 		Player.hitboxes.forEach(hitbox => {
-			if (Utils.areColliding(hitbox, this)) {
+			if (Utils.areColliding(hitbox, this.hitbox)) {
 				GameState.stop = true
 			}
 		});
@@ -98,7 +113,7 @@ export default class Ninja {
 		}
 
 		if (this.shuriken_time <= 0 && !this.shuriken_spawned &&
-			this.translation.y < GameState.screen.center.y - Player.height) {
+			this.translation.y < GameState.screen.center.y - Player.height * 2) {
 			this.state = 2
 			var shuriken = new Shuriken(this)
 			GameState.shurikens.push(shuriken)
@@ -180,6 +195,11 @@ export default class Ninja {
 			case 3: action += "Jump"; break;
 			case 4: action += "Sliding"; break;
 		}
+
+		// To fix sliding ninja left offset
+		if (this.prev_texture == 1 && this.state == 4 && this.left_spawn)
+			this.translation.x -= this.sizes[4].w - this.sizes[1].w
+		this.prev_texture = this.state
 
 		return action + direction
 	}

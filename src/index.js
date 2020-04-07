@@ -1,5 +1,6 @@
 'use strict';
 
+import $ from "jquery";
 import GLManager from './scripts/GLManager.js'
 import GameState from './scripts/GameState.js'
 import Utils from './scripts/Utils.js'
@@ -17,9 +18,6 @@ GameState.screen.center.y = GameState.screen.y - Terrain.height;
 
 var a = new Rectangle(1, GameState.screen.y, GameState.colors.red, 0);
 a.translation.x = GameState.screen.center.x;
-
-var pointsDiv = document.getElementById('points')
-var levelDiv = document.getElementById('level')
 
 function main() {
 	// Get A WebGL context
@@ -70,26 +68,31 @@ function main() {
 			Sword.update();
 			Player.update();
 			Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, Player);
-			Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, Sword);
 
 			GameState.ninjas.forEach((ninja, id) => {
-				Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, ninja);
 				ninja.update(delta, id)
+				Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, ninja);
+				//Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, ninja.hitbox);
 			});
 			GameState.shurikens.forEach((shuriken, id) => {
-				Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, shuriken);
 				shuriken.update(delta, id)
+				Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, shuriken);
 			});
+
+			/**
+			 * Debug draws
+			Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, Sword);
 
 			Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, a);
 
 			Player.hitboxes.forEach(hitbox => {
 				Utils.drawRectangle(GLManager.gl, GLManager.locators, GLManager.buffers, hitbox);
 			});
+			*/
 
-
-			pointsDiv.innerText = "Score: " + GameState.points
-			levelDiv.innerText = "Level: " + level
+			$('#points').text("SCORE: " + GameState.points)
+			$('#level').text("LEVEL: " + level)
+			$('#level').css("margin-left", (320 - $('#level').width() - 30) + "px")
 		}
 
 		previous_delta = current_delta;

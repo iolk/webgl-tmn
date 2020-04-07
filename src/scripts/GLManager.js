@@ -34,12 +34,14 @@ var glm = (function () {
 			// Create a buffer to put positions in
 			this.buffers.position = this.gl.createBuffer();
 			this.buffers.texcoord = this.gl.createBuffer();
+
+			this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
+			this.gl.enable(this.gl.BLEND);
 		}
 
 		settings() {
 			webglUtils.resizeCanvasToDisplaySize(this.gl.canvas);
 			this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
-
 			if (!GameState.stop) {
 				this.gl.clear(this.gl.COLOR_BUFFER_BIT);
 				this.gl.useProgram(this.program);

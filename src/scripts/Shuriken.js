@@ -77,6 +77,11 @@ export default class Shuriken {
 			});
 		}
 
+		if (this.translation.x > GameState.screen.x || this.translation.x < 0) {
+			this.stop = true
+			GameState.shurikens.splice(id, 1)
+		}
+
 		if (!this.stop) {
 
 			if (this.translation.y > GameState.screen.center.y) {
