@@ -4,12 +4,40 @@ import Terrain from './Terrain.js'
 
 export default (function () {
 	class Sword {
+		constructor() {/**
+			 * 0 - resting
+			 * 1 - left-bottom
+			 * 2 - left
+			 * 3 - left-up
+			 * 4 - right-bottom
+			 * 5 - right
+			 * 6 - right-up
+			 * 7 - up
+			 * 8 - middle
+			 * 9 - middle2
+			 * 9 - resting2
+			 */
 
-		constructor() {
-			this.width = 70
-			this.height = 10
-			this.color = GameState.colors.gray
+			// Sizes based on textures
+			this.sizes = [];
+			this.sizes[0] = { w: 40, h: 4, off_x: -39, off_y: 14, angle: 0 }
+			this.sizes[1] = { w: 40, h: 4, off_x: -50, off_y: 10, angle: 45 }
+			this.sizes[2] = { w: 40, h: 4, off_x: -45, off_y: -5, angle: 0 }
+			this.sizes[3] = { w: 40, h: 4, off_x: -46, off_y: -23, angle: -25 }
+			this.sizes[4] = { w: 40, h: 4, off_x: 44, off_y: 14, angle: -25 }
+			this.sizes[5] = { w: 40, h: 4, off_x: 42, off_y: 1, angle: 0 }
+			this.sizes[6] = { w: 40, h: 4, off_x: 44, off_y: -20, angle: 25 }
+			this.sizes[7] = { w: 40, h: 4, off_x: 5, off_y: -16, angle: 25 }
+			this.sizes[8] = { w: 30, h: 4, off_x: -10, off_y: -24, angle: 45 }
+			this.sizes[9] = { w: 40, h: 4, off_x: -6, off_y: -2, angle: -10 }
+			this.sizes[10] = { w: 45, h: 4, off_x: -39, off_y: 6, angle: -5 }
+
+			// General settings
+			this.width = 40
+			this.height = 4
+			this.color = [255, 0, 255, 1]
 			this.angle = 0
+			this.have_texture = false
 
 			this.resting = {
 				x: 20,
@@ -17,8 +45,8 @@ export default (function () {
 			}
 
 			this.origin = {
-				x: -35,
-				y: -5,
+				x: -20,
+				y: -2,
 			}
 
 			this.translation = {
@@ -27,76 +55,17 @@ export default (function () {
 			}
 		}
 
+		setSize() {
+			var state = this.state()
+			this.width = this.sizes[state].w
+			this.height = this.sizes[state].h
+			this.angle = this.sizes[state].angle
+			this.translation.x = GameState.screen.x / 2 + this.sizes[state].off_x
+			this.translation.y = GameState.screen.y - Terrain.height - this.height / 2 - Player.height / 2 + this.sizes[state].off_y
+		}
+
 		update() {
-			var left_to_player = GameState.screen.x / 2 - Player.width / 2 - this.width / 2;
-			var right_to_player = GameState.screen.x / 2 + Player.width / 2 + this.width / 2;
-
-			var half_player = GameState.screen.y - Terrain.height - this.height / 2 - Player.height / 2;
-
-			switch (this.state()) {
-				// resting
-				case 0:
-					this.translation.x = left_to_player + this.resting.x;
-					this.translation.y = half_player - this.resting.y;
-					this.angle = 0;
-					break;
-
-				// left-bottom
-				case 1:
-					this.translation.x = left_to_player;
-					this.translation.y = GameState.screen.y - Terrain.height - Player.height / 4;
-					this.angle = 40;
-					break;
-
-				// left
-				case 2:
-					this.translation.x = left_to_player - this.resting.x;
-					this.translation.y = half_player;
-					this.angle = 0;
-					break;
-
-				// left-up
-				case 3:
-					this.translation.x = left_to_player;
-					this.translation.y = GameState.screen.y - Terrain.height - Player.height * 1.1;
-					this.angle = -40;
-					break;
-
-				// right-bottom
-				case 4:
-					this.translation.x = right_to_player;
-					this.translation.y = GameState.screen.y - Terrain.height - Player.height / 4;
-					this.angle = -40;
-					break;
-
-				// Right
-				case 5:
-					this.translation.x = right_to_player + this.resting.x;
-					this.translation.y = half_player;
-					this.angle = 0;
-					break;
-
-				// right-up
-				case 6:
-					this.translation.x = right_to_player;
-					this.translation.y = GameState.screen.y - Terrain.height - Player.height * 1.1;
-					this.angle = 40;
-					break;
-
-				// up
-				case 7:
-					this.translation.x = GameState.screen.x / 2;
-					this.translation.y = GameState.screen.y - Terrain.height - Player.height * 1.1;
-					this.angle = 30;
-					break;
-
-				// middle
-				case 8:
-					this.translation.x = GameState.screen.x / 2 - Player.width / 3;
-					this.translation.y = GameState.screen.y - Terrain.height - Player.height / 1.5;
-					this.angle = -45;
-					break;
-			}
+			this.setSize()
 		}
 
 		state() {
@@ -110,6 +79,7 @@ export default (function () {
 			 * 6 - right-up
 			 * 7 - up
 			 * 8 - middle
+			 * 9 - middle2
 			 */
 			if (GameState.keys.left && GameState.keys.right) return 8;
 			if (GameState.keys.left || GameState.keys.right) {

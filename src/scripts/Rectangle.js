@@ -1,15 +1,17 @@
 import GameState from "./GameState.js"
+import Utils from "./Utils.js"
 
 export default class Rectangle {
-	constructor() {
-		this.height = 100
-		this.width = 100
-		this.color = [Math.random(), Math.random(), Math.random(), 1]
-		this.angle = 0
+	constructor(width, height, color, angle) {
+		this.width = width
+		this.height = height
+		this.color = color
+		this.angle = angle
+		this.have_texture = false;
 
 		this.origin = {
-			x: -50,
-			y: -50,
+			x: 0,
+			y: 0,
 		}
 
 		this.translation = {

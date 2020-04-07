@@ -1,13 +1,12 @@
 import GameState from './GameState.js'
-import TerrainTexture from '../textures/Terrain.png'
-import ImageLoader from './ImageLoader.js'
+import Terrain from './Terrain.js'
 
 export default (function () {
 
-	class Terrain {
+	class Background {
 		constructor() {
 			this.width = GameState.screen.x
-			this.height = 100
+			this.height = GameState.screen.y - Terrain.height
 			this.color = GameState.colors.red
 			this.angle = 0
 
@@ -20,7 +19,7 @@ export default (function () {
 
 			this.translation = {
 				x: 0,
-				y: GameState.screen.y - this.height,
+				y: 0,
 			}
 
 			this.rotation = {
@@ -29,13 +28,13 @@ export default (function () {
 			}
 		}
 
-		getTextureName() { return "Terrain"; }
+		getTextureName() { return "Background"; }
 	}
 
 	var instance
 
 	function createInstance() {
-		var obj = new Terrain()
+		var obj = new Background()
 		return obj
 	}
 

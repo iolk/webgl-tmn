@@ -6,55 +6,55 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>WebGL</title>
 	<style>
+		@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
+
 		body {
 			margin: 0;
+			background-color: #0D0D0D;
+			font-family: 'Anton', sans-serif;
+		}
+
+		.container {
+			position: relative;
+			height: 100vh;
 		}
 
 		canvas {
-			width: 100vw;
-			height: 100vh;
-			display: block;
+			width: 640px;
+			height: 480px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+
+			margin: -240px 0 0 -320px;
 		}
 
 		#points,
 		#level {
+			position: fixed;
+			z-index: 100;
 			position: absolute;
-			left: 20px;
-			z-index: 1;
-			top: 20px;
+			top: 50%;
+			left: 50%;
+			text-align: left;
+			font-size: 30px;
+
+			margin: 176px 0 0 -290px;
 		}
 
 		#level {
-			top: 40px;
+			text-align: right;
+			margin: 176px 0 0 320px;
 		}
 	</style>
 </head>
 
 <body>
-	<canvas id="canvasgl"></canvas>
-	<div id="points">Score: 0</div>
-	<div id="level">Level: 0</div>
-	<!--
-	<script src="script/vendor/m3.js"></script>
-	<script src="script/vendor/webgl-utils.js"></script>
-	<script src="index.js"></script>
-
-		In case of UI
-	<div id="uiContainer">
-		<div id="ui">
-			<div id="x"></div>
-			<div id="y"></div>
-			<div id="rotation"></div>
-		</div>
+	<div class="container">
+		<canvas id="canvasgl"></canvas>
+		<div id="points">SCORE: 0</div>
+		<div id="level">LEVEL: 0</div>
 	</div>
-
-	<script src="https://webglfundamentals.org/webgl/resources/jquery-1.7.1.min.js"></script>
-	<script src="https://webglfundamentals.org/webgl/resources/jquery-ui-1.8.16.custom.min.js"></script>
-	<script src="https://webglfundamentals.org/webgl/resources/jquery.mousecapture.js"></script>
-	<script src="https://webglfundamentals.org/webgl/resources/jquery.gman.ui.js"></script>
-	<script src="https://webglfundamentals.org/webgl/resources/jquery-gman-circle.js"></script>
-	<script src="https://webglfundamentals.org/webgl/resources/webgl-lessons-ui.js"></script>
-	-->
 </body>
 
 </html>
