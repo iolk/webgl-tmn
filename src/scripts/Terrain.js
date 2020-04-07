@@ -6,7 +6,6 @@ export default (function () {
 
 	class Terrain {
 		constructor() {
-			console.log("terrain")
 			this.width = GameState.screen.x
 			this.height = 100
 			this.color = GameState.colors.red

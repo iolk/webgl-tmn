@@ -5,7 +5,6 @@ export default (function () {
 
 	class Background {
 		constructor() {
-			console.log("background")
 			this.width = GameState.screen.x
 			this.height = GameState.screen.y - Terrain.height
 			this.color = GameState.colors.red

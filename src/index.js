@@ -68,7 +68,6 @@ function main() {
 
 			if (current_delta - last_spawn > spawn_time
 				&& GameState.ninjas.length <= max_spawn + level) {
-				console.log(spawn_time + " " + GameState.ninjas.length + " " + (max_spawn + level))
 				var ninja = new Ninja();
 				GameState.ninjas.push(ninja)
 				last_spawn = current_delta;

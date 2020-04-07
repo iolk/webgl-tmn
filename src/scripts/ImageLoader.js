@@ -29,7 +29,6 @@ import SamuraiResting2 from '../textures/Samurai/SamuraiResting2.png'
 import SamuraiMiddle from '../textures/Samurai/SamuraiMiddle.png'
 import SamuraiMiddle2 from '../textures/Samurai/SamuraiMiddle2.png'
 
-console.log("imageloader.js")
 
 export default (function () {
 
@@ -82,7 +81,6 @@ export default (function () {
 			image.src = texture
 
 			image.addEventListener('load', function () {
-				//console.log(texture_name + " image loaded");
 				GLM.gl.bindTexture(GLM.gl.TEXTURE_2D, il.textures.get(texture_name))
 				GLM.gl.texImage2D(GLM.gl.TEXTURE_2D, 0, GLM.gl.RGBA, GLM.gl.RGBA, GLM.gl.UNSIGNED_BYTE, image)
 				il.count--
@@ -91,8 +89,6 @@ export default (function () {
 
 		bindTexture(texture_name) {
 			GLM.gl.bindTexture(GLM.gl.TEXTURE_2D, this.textures.get(texture_name))
-			//var img = this.images.get(texture_name)
-			//GLM.gl.texImage2D(GLM.gl.TEXTURE_2D, 0, GLM.gl.RGBA, GLM.gl.RGBA, GLM.gl.UNSIGNED_BYTE, img)
 		}
 	}
 

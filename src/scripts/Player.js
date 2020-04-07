@@ -8,7 +8,6 @@ export default (function () {
 	class Player {
 
 		constructor() {
-			console.log("player")
 			/**
 			 * 0 - resting
 			 * 1 - left-bottom

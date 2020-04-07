@@ -4,8 +4,6 @@ import GameState from './GameState.js'
 import VertexShader from './shaders/vertex.glsl'
 import FragmentShader from './shaders/fragment.glsl'
 
-console.log("glmanager.js")
-
 var glm = (function () {
 	class GLManager {
 		constructor() {
