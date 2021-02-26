@@ -1,5 +1,6 @@
 # WebGL - Too Many Ninjas
 
+Check out the [live demo](https://iolk.github.io/webgl-tmn/)
 WebGL remake of [Too Many Ninjas](http://www.foddy.net/Ninjas.html)
 
 ### To start the project:
